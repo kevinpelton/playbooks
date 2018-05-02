@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: update the apt cache prior to installing packages
+    apt:
+      update_cache: yes
+  - name: install development packages
+    apt: 
+      name: "{{item}}"
+      state: present
+    with_items:
+      - curl
+      - jq
+      - golang-go
+      - nodejs
+      - npm
+      - python3-pip
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+      - docker
+      - git-core
+      - git

@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: add the mongodb keyserver to the host
+    apt_key:
+        keyserver: hkp://keyserver.ubuntu.com:80
+        id: 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+        state: present 
+  - name: add the mongodb repository to the system
+    apt_repository:
+        repo: deb  https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse
+        update_cache: yes 
+        state: present 
+  - name: install mongodb
+    apt:
+        install_recommends: yes 
+        name: mongodb-org 
+        state: present
